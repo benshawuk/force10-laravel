@@ -60,7 +60,7 @@ class InstallCommand extends Command
 
         $this->line('  <fg=gray>Next steps:</>');
         $this->line('  <fg=gray>1.</> Install npm dependencies:');
-        $this->line('     <fg=yellow>npm install force10-vite force10</>');
+        $this->line('     <fg=yellow>npm install @force10/client force10-vite</>');
 
         if (! $viteInjected) {
             $this->line('  <fg=gray>2.</> Manually add the Force10 Vite plugin to your vite.config:');
@@ -71,7 +71,7 @@ class InstallCommand extends Command
         if (! $appInjected) {
             $nextStep = $viteInjected ? '2' : '3';
             $this->line("  <fg=gray>{$nextStep}.</> Manually add Force10 to your app entry point:");
-            $this->line("     <fg=yellow>import { initForce10 } from 'force10';</>");
+            $this->line("     <fg=yellow>import { initForce10 } from '@force10/client';</>");
             $this->line('     <fg=yellow>initForce10();</>');
         }
 
@@ -93,7 +93,7 @@ class InstallCommand extends Command
 
         $content = <<<'DTS'
         declare module 'virtual:force10-manifest' {
-          import type { Force10Manifest } from 'force10';
+          import type { Force10Manifest } from '@force10/client';
           const manifest: Force10Manifest;
           export default manifest;
         }
@@ -239,7 +239,7 @@ class InstallCommand extends Command
         }
 
         // Add imports after the last existing import
-        $imports = "import { initForce10 } from 'force10';\nimport manifest from 'virtual:force10-manifest';";
+        $imports = "import { initForce10 } from '@force10/client';\nimport manifest from 'virtual:force10-manifest';";
 
         $lastImportEnd = $this->findLastImportPosition($contents);
         $contents = substr($contents, 0, $lastImportEnd) . $imports . "\n" . substr($contents, $lastImportEnd);

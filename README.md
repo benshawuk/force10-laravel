@@ -4,7 +4,7 @@ Make Inertia.js navigations instant. Zero changes to your components.
 
 ```bash
 composer require force10/laravel
-npm install force10 force10-vite
+npm install @force10/client force10-vite
 php artisan force10:install
 ```
 
